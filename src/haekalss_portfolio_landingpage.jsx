@@ -92,7 +92,7 @@ export default function PortfolioLandingPage() {
           <p className="text-gray-400 mb-2">Hello, I'm</p>
           <h1 className="text-3xl md:text-7xl font-bold mb-4">Haekal Syukur</h1>
           <p className="text-gray-300 text-sm md:text-lg mb-8 max-w-xl">
-            Informatics student & frontend web developer passionate in building modern, interactive web applications.
+            I am a computer science student with a keen interest in web development, mainly working with JavaScript and building projects as part of my learning and development process.
           </p>
           <div className="flex gap-3 md:gap-4 flex-wrap">
             <a href="#projects" onClick={handleViewProjectsClick} className="bg-white text-black px-4 md:px-6 py-2 md:py-3 rounded-2xl font-medium inline-block text-sm md:text-base">View Projects</a>
