@@ -92,15 +92,15 @@ const skills = [
       </div>
     ),
   },
-  {
-    name: 'Socket.io',
-    category: 'Real-time',
-    node: (
-      <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-600 flex items-center justify-center text-white font-bold text-xs shadow">
-        SIO
-      </div>
-    ),
-  },
+{
+  name: 'Vercel',
+  category: 'Deployment',
+  node: (
+    <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-600 flex items-center justify-center text-white font-bold text-xs shadow">
+      ▲
+    </div>
+  ),
+},
   {
     name: 'MongoDB',
     category: 'Database',
