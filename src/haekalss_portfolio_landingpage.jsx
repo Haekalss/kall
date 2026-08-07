@@ -181,7 +181,7 @@ export default function PortfolioLandingPage() {
         >
           <div className="inline-flex items-center gap-2 bg-zinc-800/80 border border-zinc-700 px-3 py-1 rounded-full text-xs text-zinc-300 mb-3">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Software Engineering Student • ULBI
+            Informatics Engineering Student • ULBI
           </div>
           
           <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">
@@ -203,7 +203,7 @@ export default function PortfolioLandingPage() {
     <span className="block text-zinc-500 text-[10px] uppercase font-semibold">
       Academic GPA
     </span>
-    <strong className="text-zinc-200 text-sm">3.69 / 4.00</strong>
+    <strong className="text-zinc-200 text-sm">3.65 / 4.00</strong>
   </div>
 
   <div>
@@ -218,7 +218,7 @@ export default function PortfolioLandingPage() {
       Status
     </span>
     <strong className="text-emerald-400 text-sm">
-      Open for Internship / Full-time
+      Open for Internship / Part Time
     </strong>
   </div>
 </div>
@@ -232,7 +232,7 @@ export default function PortfolioLandingPage() {
               View Projects
             </a>
             <a 
-              href={`${process.env.PUBLIC_URL}/CV Muhamad Haekal Syukur.pdf`}
+              href={`${process.env.PUBLIC_URL}/CV Muhamad Haekal Syukur.PDF`}
               download="CV Muhamad Haekal Syukur.pdf"
               className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-4 py-2.5 rounded-xl text-xs md:text-sm font-medium transition flex items-center gap-2"
             >
