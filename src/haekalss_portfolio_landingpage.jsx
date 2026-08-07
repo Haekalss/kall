@@ -191,7 +191,7 @@ export default function PortfolioLandingPage() {
           {/* About Narrative in English */}
           <div className="text-gray-300 text-sm md:text-base mb-6 leading-relaxed max-w-xl space-y-3">
             <p>
-              I am an Applied Bachelor (D4) Software Engineering student at <span className="text-white font-semibold">Universitas Logistik dan Bisnis Internasional (ULBI)</span> with a 3.69 GPA. Specializing in <span className="text-white font-semibold">Full-Stack Web Development</span>, I am experienced in building web applications from database architecture design to responsive user interfaces.
+              I am an Applied Bachelor (D4) Informatics Engineering student at <span className="text-white font-semibold">Universitas Logistik dan Bisnis Internasional (ULBI)</span> with a 3.65 GPA. Specializing in <span className="text-white font-semibold">Full-Stack Web Development</span>, I am experienced in building web applications from database architecture design to responsive user interfaces.
             </p>
             <p>
               My core technical stack includes the <span className="text-white font-semibold">React, Next.js, Express.js, Go (Basics),</span> and <span className="text-white font-semibold">MongoDB</span> ecosystem. Proficient in engineering RESTful APIs, real-time architectures with Socket.io, and payment gateway integrations.
