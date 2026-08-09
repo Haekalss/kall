@@ -232,11 +232,11 @@ export default function PortfolioLandingPage() {
               View Projects
             </a>
             <a 
-              href={`${process.env.PUBLIC_URL}/CV Muhamad Haekal Syukur.PDF`}
+              href={`${process.env.PUBLIC_URL}/cv-muhamad-haekal-syukur.pdf`}
               download="CV Muhamad Haekal Syukur.pdf"
               className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-4 py-2.5 rounded-xl text-xs md:text-sm font-medium transition flex items-center gap-2"
             >
-              <span>Download CV</span>
+              <span>Download Resume</span>
               <span className="text-zinc-400 text-xs">PDF</span>
             </a>
             <a 
@@ -489,7 +489,7 @@ export default function PortfolioLandingPage() {
         <div className="w-full max-w-2xl mx-auto bg-zinc-900/80 border border-zinc-800 rounded-3xl p-8 shadow-2xl">
           <h2 className="text-2xl md:text-3xl font-bold mb-3">Let's Work Together</h2>
           <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-            I am open to internship opportunities, full-time roles, freelance projects, and web application development collaborations.
+            I am open to internship opportunities, part-time roles, freelance projects, and web application development collaborations.
           </p>
           
           <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
