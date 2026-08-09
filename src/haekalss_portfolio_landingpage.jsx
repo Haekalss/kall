@@ -48,8 +48,10 @@ const skills = [
     name: 'JavaScript',
     category: 'Language',
     node: (
-      <div className="w-12 h-12 bg-[#F7DF1E] flex items-end justify-start rounded-md overflow-hidden shadow">
-        <span className="text-xl font-black text-black pl-1 pb-0.5">JS</span>
+      <div className="w-12 h-12 bg-[#F7DF1E] rounded-md shadow flex items-center justify-center overflow-hidden">
+        <svg viewBox="0 0 128 128" className="w-9 h-9">
+          <path fill="#000" d="M22.034 0h84v128H22.034zM52 96.5c1.5 3 4.4 5.5 9 5.5 4.8 0 7.7-2.4 7.7-6.2 0-4.3-3.5-5.9-9.4-8.4l-3.2-1.4c-9.3-4-15.5-9-15.5-19.6 0-9.8 7.5-17.2 19.1-17.2 8.3 0 14.3 2.9 18.6 10.5l-10.2 6.5c-2.2-4-4.7-5.6-8.4-5.6-3.8 0-6.2 2.4-6.2 5.6 0 3.9 2.4 5.5 8 8l3.2 1.4c11 4.7 17.2 9.5 17.2 20.4 0 11.8-9.3 18.3-21.7 18.3-12.1 0-19.9-5.8-23.7-13.4L52 96.5z"/>
+        </svg>
       </div>
     ),
   },
@@ -57,8 +59,11 @@ const skills = [
     name: 'Go',
     category: 'Language',
     node: (
-      <div className="w-12 h-12 bg-[#00ADD8] flex items-center justify-center rounded-md text-white font-bold text-xl shadow">
-        Go
+      <div className="w-12 h-12 bg-[#00ADD8] rounded-md flex items-center justify-center shadow overflow-hidden">
+        <svg viewBox="0 0 128 128" className="w-9 h-9" fill="#fff">
+          <path d="M9.7 62.5c-.2 0-.2-.1-.1-.3l1.4-1.8c.1-.2.4-.3.6-.3h35.9c.2 0 .3.2.2.4l-1.1 1.7c-.1.2-.4.4-.5.4l-36.4-.1zM.2 68.1c-.2 0-.2-.1-.1-.3l1.4-1.8c.1-.2.4-.3.6-.3h45.9c.2 0 .3.2.3.4l-.5 1.6c-.1.3-.3.4-.6.4L.2 68.1zM15.3 73.7c-.2 0-.3-.2-.1-.4l.9-1.7c.1-.2.4-.4.6-.4h28.9c.2 0 .4.2.4.4l-.1 1.6c0 .3-.3.5-.5.5H15.3zM78.6 60.4c-4.5 1.1-7.6 2-12 3.1-1.1.3-1.2.3-2.1-.7-1.1-1.2-1.9-2-3.5-2.7-4.6-2.3-9.1-1.6-13.3 1.1-5 3.2-7.6 8-7.5 13.9.1 5.8 4.1 10.6 9.8 11.4 4.9.7 9-1 12.2-4.6.6-.8 1.2-1.6 1.9-2.6h-13.8c-1.5 0-1.9-.9-1.4-2.1.9-2.1 2.6-5.6 3.6-7.3.2-.4.7-1.1 1.7-1.1h26.2c-.1 1.9-.1 3.8-.4 5.7-.8 5.2-2.7 10-5.9 14.2-5.2 6.9-12 11.1-20.6 12.3-7.1 1-13.7-.4-19.5-4.7-5.4-4-8.4-9.3-9.2-15.9-.9-7.8 1.4-14.8 6.1-21 5.1-6.7 11.9-10.9 20.2-12.4 6.8-1.2 13.3-.4 19.1 3.5 3.8 2.5 6.5 5.9 8.3 10 .4.6.1 1-.7 1.1z"/>
+          <path d="M100.9 96.3c-6.6-.2-12.6-2.1-17.7-6.4-4.3-3.7-7-8.4-7.8-14-1.2-8.2 1.1-15.5 6-21.9 5.3-6.9 11.6-10.5 20.2-12 7.4-1.3 14.3-.6 20.6 3.7 5.7 3.9 9.2 9.2 10.1 16.1 1.2 9.8-1.6 17.8-8.3 24.7-4.8 4.9-10.7 8-17.5 9.4-1.8.3-3.6.4-5.6.4zm16.6-28.2c-.1-.9-.1-1.7-.2-2.5-1.5-8.1-8.9-12.7-16.6-10.9-7.5 1.7-12.4 6.5-14.2 14.1-1.5 6.3 1.6 12.7 7.4 15.3 4.5 2 9 1.7 13.3-.5 6.4-3.4 9.9-8.6 10.3-15.5z"/>
+        </svg>
       </div>
     ),
   },
@@ -66,20 +71,43 @@ const skills = [
     name: 'React.js',
     category: 'Frontend',
     node: (
-      <svg viewBox="0 0 120 120" className="w-12 h-12" role="img" aria-label="React">
-        <circle cx="60" cy="60" r="10" fill="#61DAFB" />
-        <ellipse cx="60" cy="60" rx="42" ry="16" fill="none" stroke="#61DAFB" strokeWidth="6" />
-        <ellipse cx="60" cy="60" rx="42" ry="16" fill="none" stroke="#61DAFB" strokeWidth="6" transform="rotate(60 60 60)" />
-        <ellipse cx="60" cy="60" rx="42" ry="16" fill="none" stroke="#61DAFB" strokeWidth="6" transform="rotate(120 60 60)" />
-      </svg>
+      <div className="w-12 h-12 bg-zinc-800 rounded-md flex items-center justify-center shadow border border-zinc-700">
+        <svg viewBox="-11.5 -10.23174 23 20.46348" className="w-9 h-9">
+          <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
+          <g stroke="#61DAFB" strokeWidth="1" fill="none">
+            <ellipse rx="11" ry="4.2" />
+            <ellipse rx="11" ry="4.2" transform="rotate(60)" />
+            <ellipse rx="11" ry="4.2" transform="rotate(120)" />
+          </g>
+        </svg>
+      </div>
     ),
   },
   {
     name: 'Next.js',
     category: 'Framework',
     node: (
-      <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center shadow border border-zinc-700">
-        <span className="text-2xl font-bold text-white">N</span>
+      <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center shadow border border-zinc-700 overflow-hidden">
+        <svg viewBox="0 0 180 180" className="w-10 h-10">
+          <mask id="nextMask" style={{ maskType: 'alpha' }}>
+            <circle cx="90" cy="90" r="90" fill="#fff" />
+          </mask>
+          <g mask="url(#nextMask)">
+            <circle cx="90" cy="90" r="90" fill="#000" />
+            <path fill="url(#nextGrad)" d="M149.5 157.5 69.5 54H54v72h12V69l73 94z" />
+            <rect x="115" y="54" width="12" height="72" fill="url(#nextGrad2)" />
+          </g>
+          <defs>
+            <linearGradient id="nextGrad" x1="109" y1="116" x2="144" y2="160" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#fff" />
+              <stop offset="1" stopColor="#fff" stopOpacity="0" />
+            </linearGradient>
+            <linearGradient id="nextGrad2" x1="121" y1="54" x2="121" y2="106" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#fff" />
+              <stop offset="1" stopColor="#fff" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
       </div>
     ),
   },
@@ -87,26 +115,32 @@ const skills = [
     name: 'Express.js',
     category: 'Backend',
     node: (
-      <div className="w-12 h-12 rounded-md bg-zinc-800 flex items-center justify-center text-xs font-semibold text-zinc-200 border border-zinc-700 shadow">
-        ex
+      <div className="w-12 h-12 rounded-md bg-white flex items-center justify-center shadow border border-zinc-700">
+        <svg viewBox="0 0 128 128" className="w-9 h-9" fill="#000">
+          <path d="M126.67 98.44c-4.56 1.16-7.38.05-9.91-3.75-5.68-8.51-11.95-16.63-18-24.9-.78-1.07-1.6-2.1-2.66-3.48C89 76.7 81.94 86.19 75.15 95.9c-2.35 3.35-4.81 4.79-9.13 3.46l26.91-36.9-25.16-33.51c4.29-.85 7.24-.42 9.75 3.36 5.87 8.85 12.36 17.28 19 26.5 6.77-9.31 13.34-17.9 19.4-26.84 2.31-3.39 4.86-4.59 9.2-3.14C122.06 40.9 114.71 50.44 107.47 60c-.85 1.12-1.67 2.27-2.66 3.62 7.31 9.66 14.62 19.32 22.07 29.19zM1.33 61.74c.72-3.61 1.2-7.29 2.2-10.83C9.7 29.5 32.36 20 51.72 30.31c11.51 6.14 16.61 16.5 17.94 29 .21 2-.28 2.65-2.35 2.64q-30.72-.12-61.44 0c-1.94 0-2.61.42-2.29 2.5 2 12.66 12.42 21.66 25.31 21.87 9.71.16 17.63-3.28 23.72-10.9.68-.86 1.35-1.73 2.15-2.76 2.9 1.66 5.68 3.28 8.5 4.85.06.14.09.29.15.43-8.05 12.05-19.5 17.4-33.87 15.87-19.36-2.06-31.71-16.05-32.7-33.2-.05-.87-.03-1.75-.05-2.62zm10.83-1.62h58.51c-2-11.2-9.99-19.9-20.83-22.13-11.85-2.42-24.4 4.4-31.87 15.4-2.37 3.5-3.96 7.3-5.81 6.73z"/>
+        </svg>
       </div>
     ),
   },
-{
-  name: 'Vercel',
-  category: 'Deployment',
-  node: (
-    <div className="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-600 flex items-center justify-center text-white font-bold text-xs shadow">
-      ▲
-    </div>
-  ),
-},
+  {
+    name: 'Vercel',
+    category: 'Deployment',
+    node: (
+      <div className="w-12 h-12 rounded-full bg-white border border-zinc-600 flex items-center justify-center shadow">
+        <svg viewBox="0 0 128 128" className="w-8 h-8">
+          <path fill="#000" d="M64 20 128 108H0z" />
+        </svg>
+      </div>
+    ),
+  },
   {
     name: 'MongoDB',
     category: 'Database',
     node: (
-      <div className="w-12 h-12 bg-[#47A248] rounded-md flex items-center justify-center text-white font-bold text-sm shadow">
-        MDB
+      <div className="w-12 h-12 bg-zinc-900 rounded-md flex items-center justify-center shadow border border-zinc-700">
+        <svg viewBox="0 0 128 128" className="w-8 h-8">
+          <path fill="#47A248" d="M64 3.6S38.9 25.4 38.9 66.9c0 26.4 15.9 44.6 25.1 52.9 9.2-8.3 25.1-26.5 25.1-52.9 0-41.5-25.1-63.3-25.1-63.3zm0 8.6c4.9 5.4 17.6 22.3 17.6 54.7 0 16.4-6.5 28.6-12.1 36.7-1.9-4.6-3.3-9.8-3.9-15.5-.2-1.7-.3-3.4-.3-5.2V12.2zm-3.2 76.4c-.6-4.5-.9-9.2-.9-14V12.2c-4.9 5.4-13.5 22.3-13.5 54.7 0 9.9 2.4 18.6 5.6 25.9.9 2 1.9 3.9 2.9 5.6l5.9-9.8z"/>
+        </svg>
       </div>
     ),
   },
@@ -114,8 +148,10 @@ const skills = [
     name: 'Tailwind CSS',
     category: 'Styling',
     node: (
-      <div className="w-12 h-12 bg-[#38BDF8]/20 border border-[#38BDF8]/40 rounded-md flex items-center justify-center text-[#38BDF8] font-bold text-xs shadow">
-        Tailwind
+      <div className="w-12 h-12 bg-zinc-900 rounded-md flex items-center justify-center shadow border border-zinc-700">
+        <svg viewBox="0 0 128 128" className="w-9 h-9">
+          <path fill="#38BDF8" d="M64 25.6c-17.1 0-27.8 8.5-32 25.6 6.4-8.5 13.9-11.7 22.4-9.6 4.9 1.2 8.4 4.7 12.3 8.7 6.3 6.4 13.6 13.7 29.5 13.7 17.1 0 27.8-8.5 32-25.6-6.4 8.5-13.9 11.7-22.4 9.6-4.9-1.2-8.4-4.7-12.3-8.7-6.3-6.4-13.6-13.7-29.5-13.7zM32 64c-17.1 0-27.8 8.5-32 25.6C6.4 81.1 13.9 77.9 22.4 80c4.9 1.2 8.4 4.7 12.3 8.7 6.3 6.4 13.6 13.7 29.5 13.7 17.1 0 27.8-8.5 32-25.6-6.4 8.5-13.9 11.7-22.4 9.6-4.9-1.2-8.4-4.7-12.3-8.7-6.3-6.4-13.6-13.7-29.5-13.7z"/>
+        </svg>
       </div>
     ),
   },
@@ -191,7 +227,7 @@ export default function PortfolioLandingPage() {
           {/* About Narrative in English */}
           <div className="text-gray-300 text-sm md:text-base mb-6 leading-relaxed max-w-xl space-y-3">
             <p>
-              I am an Applied Bachelor (D4) Informatics Engineering student at <span className="text-white font-semibold">Universitas Logistik dan Bisnis Internasional (ULBI)</span> with a 3.65 GPA. Specializing in <span className="text-white font-semibold">Full-Stack Web Development</span>, I am experienced in building web applications from database architecture design to responsive user interfaces.
+              I am an Applied Bachelor (D4) Informatics Engineering student at <span className="text-white font-semibold">Universitas Logistik dan Bisnis Internasional (ULBI)</span> with a 3.65 GPA. Specializing in <span className="text-white font-semibold">Web Development</span>, I am experienced in building web applications from database architecture design to responsive user interfaces.
             </p>
             <p>
               My core technical stack includes the <span className="text-white font-semibold">React, Next.js, Express.js, Go (Basics),</span> and <span className="text-white font-semibold">MongoDB</span> ecosystem. Proficient in engineering RESTful APIs, real-time architectures with Socket.io, and payment gateway integrations.
