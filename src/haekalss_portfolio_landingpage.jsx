@@ -44,28 +44,40 @@ const projects = [
 ];
 
 const skills = [
-  {
-    name: 'JavaScript',
-    category: 'Language',
-    node: (
-      <div className="w-12 h-12 bg-[#F7DF1E] rounded-md shadow flex items-center justify-center overflow-hidden">
-        <svg viewBox="0 0 128 128" className="w-9 h-9">
-          <path >./javascript-svgrepo.com.svg </path>
-        </svg>
-      </div>
-    ),
-  },
-  {
-    name: 'Go',
-    category: 'Language',
-    node: (
-      <div className="w-12 h-12 bg-[#00ADD8] rounded-md flex items-center justify-center shadow overflow-hidden">
-        <svg viewBox="0 0 128 128" className="w-9 h-9" fill="#fff">
-          <path > ./golang-svgrepo-com.svg </path>
-        </svg>
-      </div>
-    ),
-  },
+ {
+  name: 'JavaScript',
+  category: 'Language',
+  node: (
+    <div className="w-12 h-12 rounded-md shadow overflow-hidden">
+      <svg viewBox="0 0 128 128" className="w-full h-full">
+        <rect width="128" height="128" fill="#F7DF1E" />
+        <path fill="#000" d="M87.5 105.5c2.5 4 5.7 7 11.5 7 4.8 0 7.9-2.4 7.9-5.7 0-4-3.2-5.4-8.5-7.7l-2.9-1.3c-8.4-3.6-14-8.1-14-17.6 0-8.8 6.7-15.5 17.2-15.5 7.5 0 12.8 2.6 16.7 9.4l-9.1 5.9c-2-3.6-4.2-5-7.6-5-3.5 0-5.6 2.2-5.6 5 0 3.5 2.2 4.9 7.1 7.1l2.9 1.3c9.9 4.2 15.5 8.6 15.5 18.4 0 10.6-8.3 16.4-19.5 16.4-10.9 0-18-5.2-21.5-12.1l9.9-5.6zM49.9 105.9c1.8 3.2 3.5 5.9 7.5 5.9 3.8 0 6.2-1.5 6.2-7.3V66.4h11.6v38.3c0 12-7 17.5-17.3 17.5-9.3 0-14.6-4.8-17.4-10.6l9.4-5.7z"/>
+      </svg>
+    </div>
+  ),
+},
+{
+  name: 'Go',
+  category: 'Language',
+  node: (
+    <div className="w-12 h-12 rounded-md shadow overflow-hidden">
+      <svg viewBox="0 0 128 128" className="w-full h-full">
+        <rect width="128" height="128" fill="#00ADD8" />
+        <text
+          x="64"
+          y="76"
+          textAnchor="middle"
+          fontFamily="Arial, sans-serif"
+          fontWeight="700"
+          fontSize="42"
+          fill="#fff"
+        >
+          Go
+        </text>
+      </svg>
+    </div>
+  ),
+},
   {
     name: 'React.js',
     category: 'Frontend',
