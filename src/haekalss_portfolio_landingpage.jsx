@@ -1,570 +1,527 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 
+// ==========================================
+// KONTEN ASLI & UTUH
+// ==========================================
 const projects = [
   {
     title: 'Nyumbangin',
-    subtitle: 'Digital Donation & Streamer Alert Web App',
-    desc: 'An interactive crowdfunding platform designed for content creators. Features real-time donation notifications for live streaming, OAuth 2.0 authentication, Midtrans Payment Gateway integration (Sandbox), and dedicated dashboards for admins and creators.',
+    type: 'FULL-STACK FEATURE',
+    year: '2026',
+    number: '01',
+    desc: 'Digital donation platform for Indonesian creators and streamers, combining payments, real-time alerts, authentication, dashboards, and creator payouts.',
     tech: ['Next.js', 'MongoDB', 'Socket.io', 'OAuth 2.0', 'Midtrans'],
     url: 'https://github.com/Haekalss/Nyumbangin',
     website: 'https://nyumbangin.web.id',
-    highlights: [
-      'Real-time donation alerts via Socket.io',
-      'Secure authentication using OAuth 2.0',
-      'Integrated Midtrans Payment Gateway (Sandbox)'
-    ]
+    accent: 'DONATION / REAL-TIME',
+    quote: 'A platform built around the moment a donation becomes part of a live stream.',
   },
   {
     title: 'TakoType',
-    subtitle: 'Typing Speed Test & Stats Tracker Platform',
-    desc: 'An interactive web application for measuring and training typing speed with real-time Words Per Minute (WPM) calculations, accuracy tracking, and performance statistics analytics.',
+    type: 'INTERACTIVE WEB APP',
+    year: '2025',
+    number: '02',
+    desc: 'Typing practice and statistics platform with real-time WPM calculations, accuracy tracking, and performance analytics.',
     tech: ['React.js', 'Express.js', 'Tailwind CSS'],
     url: 'https://github.com/Haekalss/TakoType',
     website: 'https://takotype.web.id',
-    highlights: [
-      'Real-time WPM & Accuracy calculations',
-      'Responsive application state management',
-      'Modern & efficient desktop UI design'
-    ]
+    accent: 'TYPING / ANALYTICS',
+    quote: 'A small interaction can become an entire experience when the feedback is immediate.',
   },
   {
     title: 'Dishy',
-    subtitle: 'Official Band Landing Page',
-    desc: 'A responsive landing page website for a local band focusing on modern visual design, interactive navigation, a hero slider, and cross-component performance optimization.',
+    type: 'CREATIVE WEB',
+    year: '2025',
+    number: '03',
+    desc: 'Responsive landing page for a local band with a visual-first hero, interactive gallery, navigation, and performance-focused components.',
     tech: ['Next.js', 'Tailwind CSS'],
     url: 'https://github.com/Haekalss/Dishy',
     website: 'https://dishy.web.id',
-    highlights: [
-      'Ultra-responsive layout across all devices',
-      'Hero slider & interactive gallery',
-      'Optimized component performance and consistency'
+    accent: 'MUSIC / VISUAL',
+    quote: 'The interface should feel like the band before the visitor reads a single word.',
+  }
+];
+
+const orgs = [
+  {
+    role: 'Project Manager',
+    event: 'LKMM 2',
+    desc: [
+      'Led planning and cross-functional committee coordination.',
+      'Built timelines, task assignments, and preparation tracking.',
+      'Liaised with speakers and monitored event execution.'
+    ]
+  },
+  {
+    role: 'Secretary',
+    event: 'MORRIS IF',
+    desc: [
+      'Official letters, proposals, and supporting documents.',
+      'Meeting minutes and administrative archives.',
+      'Committee communication and administrative flow.'
     ]
   }
 ];
 
+const certificates = [
+  { id: '01', title: 'Full-Stack Web Development', issuer: 'Bootcamp / Tech Academy', year: '2025' },
+  { id: '02', title: 'Frontend React.js', issuer: 'Course Provider', year: '2024' },
+  { id: '03', title: 'UI/UX Design Fundamental', issuer: 'Course Provider', year: '2023' }
+];
+
 const skills = [
- {
-  name: 'JavaScript',
-  category: 'Language',
-  node: (
-    <div className="w-12 h-12 rounded-md shadow overflow-hidden">
-      <svg viewBox="0 0 128 128" className="w-full h-full">
-        <rect width="128" height="128" fill="#F7DF1E" />
-        <path fill="#000" d="M87.5 105.5c2.5 4 5.7 7 11.5 7 4.8 0 7.9-2.4 7.9-5.7 0-4-3.2-5.4-8.5-7.7l-2.9-1.3c-8.4-3.6-14-8.1-14-17.6 0-8.8 6.7-15.5 17.2-15.5 7.5 0 12.8 2.6 16.7 9.4l-9.1 5.9c-2-3.6-4.2-5-7.6-5-3.5 0-5.6 2.2-5.6 5 0 3.5 2.2 4.9 7.1 7.1l2.9 1.3c9.9 4.2 15.5 8.6 15.5 18.4 0 10.6-8.3 16.4-19.5 16.4-10.9 0-18-5.2-21.5-12.1l9.9-5.6zM49.9 105.9c1.8 3.2 3.5 5.9 7.5 5.9 3.8 0 6.2-1.5 6.2-7.3V66.4h11.6v38.3c0 12-7 17.5-17.3 17.5-9.3 0-14.6-4.8-17.4-10.6l9.4-5.7z"/>
-      </svg>
-    </div>
-  ),
-},
-{
-  name: 'Go',
-  category: 'Language',
-  node: (
-    <div className="w-12 h-12 rounded-md shadow overflow-hidden">
-      <svg viewBox="0 0 128 128" className="w-full h-full">
-        <rect width="128" height="128" fill="#00ADD8" />
-        <text
-          x="64"
-          y="76"
-          textAnchor="middle"
-          fontFamily="Arial, sans-serif"
-          fontWeight="700"
-          fontSize="42"
-          fill="#fff"
-        >
-          Go
-        </text>
-      </svg>
-    </div>
-  ),
-},
-  {
-    name: 'React.js',
-    category: 'Frontend',
-    node: (
-      <div className="w-12 h-12 bg-zinc-800 rounded-md flex items-center justify-center shadow border border-zinc-700">
-        <svg viewBox="-11.5 -10.23174 23 20.46348" className="w-9 h-9">
-          <circle cx="0" cy="0" r="2.05" fill="#61DAFB" />
-          <g stroke="#61DAFB" strokeWidth="1" fill="none">
-            <ellipse rx="11" ry="4.2" />
-            <ellipse rx="11" ry="4.2" transform="rotate(60)" />
-            <ellipse rx="11" ry="4.2" transform="rotate(120)" />
-          </g>
-        </svg>
-      </div>
-    ),
-  },
-  {
-    name: 'Next.js',
-    category: 'Framework',
-    node: (
-      <div className="w-12 h-12 rounded-full bg-black flex items-center justify-center shadow border border-zinc-700 overflow-hidden">
-        <svg viewBox="0 0 180 180" className="w-10 h-10">
-          <mask id="nextMask" style={{ maskType: 'alpha' }}>
-            <circle cx="90" cy="90" r="90" fill="#fff" />
-          </mask>
-          <g mask="url(#nextMask)">
-            <circle cx="90" cy="90" r="90" fill="#000" />
-            <path fill="url(#nextGrad)" d="M149.5 157.5 69.5 54H54v72h12V69l73 94z" />
-            <rect x="115" y="54" width="12" height="72" fill="url(#nextGrad2)" />
-          </g>
-          <defs>
-            <linearGradient id="nextGrad" x1="109" y1="116" x2="144" y2="160" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#fff" />
-              <stop offset="1" stopColor="#fff" stopOpacity="0" />
-            </linearGradient>
-            <linearGradient id="nextGrad2" x1="121" y1="54" x2="121" y2="106" gradientUnits="userSpaceOnUse">
-              <stop stopColor="#fff" />
-              <stop offset="1" stopColor="#fff" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    ),
-  },
-  {
-    name: 'Express.js',
-    category: 'Backend',
-    node: (
-      <div className="w-12 h-12 rounded-md bg-white flex items-center justify-center shadow border border-zinc-700">
-        <svg viewBox="0 0 128 128" className="w-9 h-9" fill="#000">
-          <path d="M126.67 98.44c-4.56 1.16-7.38.05-9.91-3.75-5.68-8.51-11.95-16.63-18-24.9-.78-1.07-1.6-2.1-2.66-3.48C89 76.7 81.94 86.19 75.15 95.9c-2.35 3.35-4.81 4.79-9.13 3.46l26.91-36.9-25.16-33.51c4.29-.85 7.24-.42 9.75 3.36 5.87 8.85 12.36 17.28 19 26.5 6.77-9.31 13.34-17.9 19.4-26.84 2.31-3.39 4.86-4.59 9.2-3.14C122.06 40.9 114.71 50.44 107.47 60c-.85 1.12-1.67 2.27-2.66 3.62 7.31 9.66 14.62 19.32 22.07 29.19zM1.33 61.74c.72-3.61 1.2-7.29 2.2-10.83C9.7 29.5 32.36 20 51.72 30.31c11.51 6.14 16.61 16.5 17.94 29 .21 2-.28 2.65-2.35 2.64q-30.72-.12-61.44 0c-1.94 0-2.61.42-2.29 2.5 2 12.66 12.42 21.66 25.31 21.87 9.71.16 17.63-3.28 23.72-10.9.68-.86 1.35-1.73 2.15-2.76 2.9 1.66 5.68 3.28 8.5 4.85.06.14.09.29.15.43-8.05 12.05-19.5 17.4-33.87 15.87-19.36-2.06-31.71-16.05-32.7-33.2-.05-.87-.03-1.75-.05-2.62zm10.83-1.62h58.51c-2-11.2-9.99-19.9-20.83-22.13-11.85-2.42-24.4 4.4-31.87 15.4-2.37 3.5-3.96 7.3-5.81 6.73z"/>
-        </svg>
-      </div>
-    ),
-  },
-  {
-    name: 'Vercel',
-    category: 'Deployment',
-    node: (
-      <div className="w-12 h-12 rounded-full bg-white border border-zinc-600 flex items-center justify-center shadow">
-        <svg viewBox="0 0 128 128" className="w-8 h-8">
-          <path fill="#000" d="M64 20 128 108H0z" />
-        </svg>
-      </div>
-    ),
-  },
-  {
-    name: 'MongoDB',
-    category: 'Database',
-    node: (
-      <div className="w-12 h-12 bg-zinc-900 rounded-md flex items-center justify-center shadow border border-zinc-700">
-        <svg viewBox="0 0 128 128" className="w-8 h-8">
-          <path fill="#47A248" d="M64 3.6S38.9 25.4 38.9 66.9c0 26.4 15.9 44.6 25.1 52.9 9.2-8.3 25.1-26.5 25.1-52.9 0-41.5-25.1-63.3-25.1-63.3zm0 8.6c4.9 5.4 17.6 22.3 17.6 54.7 0 16.4-6.5 28.6-12.1 36.7-1.9-4.6-3.3-9.8-3.9-15.5-.2-1.7-.3-3.4-.3-5.2V12.2zm-3.2 76.4c-.6-4.5-.9-9.2-.9-14V12.2c-4.9 5.4-13.5 22.3-13.5 54.7 0 9.9 2.4 18.6 5.6 25.9.9 2 1.9 3.9 2.9 5.6l5.9-9.8z"/>
-        </svg>
-      </div>
-    ),
-  },
-  {
-    name: 'Tailwind CSS',
-    category: 'Styling',
-    node: (
-      <div className="w-12 h-12 bg-zinc-900 rounded-md flex items-center justify-center shadow border border-zinc-700">
-        <svg viewBox="0 0 128 128" className="w-9 h-9">
-          <path fill="#38BDF8" d="M64 25.6c-17.1 0-27.8 8.5-32 25.6 6.4-8.5 13.9-11.7 22.4-9.6 4.9 1.2 8.4 4.7 12.3 8.7 6.3 6.4 13.6 13.7 29.5 13.7 17.1 0 27.8-8.5 32-25.6-6.4 8.5-13.9 11.7-22.4 9.6-4.9-1.2-8.4-4.7-12.3-8.7-6.3-6.4-13.6-13.7-29.5-13.7zM32 64c-17.1 0-27.8 8.5-32 25.6C6.4 81.1 13.9 77.9 22.4 80c4.9 1.2 8.4 4.7 12.3 8.7 6.3 6.4 13.6 13.7 29.5 13.7 17.1 0 27.8-8.5 32-25.6-6.4 8.5-13.9 11.7-22.4 9.6-4.9-1.2-8.4-4.7-12.3-8.7-6.3-6.4-13.6-13.7-29.5-13.7z"/>
-        </svg>
-      </div>
-    ),
-  },
+  ['JavaScript', 'LANGUAGE', 'JS'],
+  ['React.js', 'FRONTEND', 'RE'],
+  ['Next.js', 'FRAMEWORK', 'NX'],
+  ['Node.js', 'BACKEND', 'ND'],
+  ['Express.js', 'BACKEND', 'EX'],
+  ['MongoDB', 'DATABASE', 'DB'],
+  ['Tailwind CSS', 'STYLING', 'TW'],
+  ['Vercel', 'DEPLOYMENT', '▲'],
 ];
 
-const certifications = [
-  {
-    title: 'Learn Go Course',
-    issuer: 'CodeCademy',
-    year: '2025',
-    fileUrl: `${process.env.PUBLIC_URL}/GO (code academy).pdf`, 
-    skills: ['Go', 'Backend Basics']
-  },
-  {
-    title: 'Java Programming',
-    issuer: 'Oracle Academy',
-    year: '2024',
-    fileUrl: `${process.env.PUBLIC_URL}/JAVA Exam.pdf`, 
-    skills: ['Java', 'OOP', 'Algorithm']
-  }
+const credits = [
+  ['ROLE', 'Web Developer'],
+  ['EDUCATION', 'D4 Informatics Engineering'],
+  ['SCHOOL', 'Universitas Logistik dan Bisnis Internasional'],
+  ['GPA', '3.65 / 4.00'],
+  ['BASED', 'Bandung, Indonesia'],
 ];
 
-export default function PortfolioLandingPage() {
-  const [profileImageError, setProfileImageError] = useState(false);
-  const [copied, setCopied] = useState(false);
-  const [selectedCert, setSelectedCert] = useState(null);
+// ==========================================
+// CINEMATIC OPENER
+// ==========================================
+function CinematicOpener({ onComplete }) {
+  const [count, setCount] = useState(3);
 
-  const handleScroll = (e, id) => {
-    e.preventDefault();
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -70; 
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+  useEffect(() => {
+    if (count > 0) {
+      const timer = setTimeout(() => setCount(count - 1), 800);
+      return () => clearTimeout(timer);
+    } else {
+      const timer = setTimeout(() => onComplete(), 500);
+      return () => clearTimeout(timer);
     }
-  };
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText('haaaekall@gmail.com');
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
+  }, [count, onComplete]);
 
   return (
-    <div className="min-h-screen bg-black text-white font-sans selection:bg-white selection:text-black scroll-smooth">
-      {/* Floating Navbar */}
-      <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 bg-zinc-900/80 backdrop-blur-md border border-zinc-800 px-5 md:px-6 py-2.5 rounded-full flex gap-4 md:gap-6 text-xs md:text-sm font-medium shadow-2xl">
-        <a href="#about" onClick={(e) => handleScroll(e, 'about')} className="hover:text-zinc-400 transition-colors duration-200">About</a>
-        <a href="#skills" onClick={(e) => handleScroll(e, 'skills')} className="hover:text-zinc-400 transition-colors duration-200">Skills</a>
-        <a href="#projects" onClick={(e) => handleScroll(e, 'projects')} className="hover:text-zinc-400 transition-colors duration-200">Projects</a>
-        <a href="#certifications" onClick={(e) => handleScroll(e, 'certifications')} className="hover:text-zinc-400 transition-colors duration-200">Certificates</a>
-        <a href="#organization" onClick={(e) => handleScroll(e, 'organization')} className="hover:text-zinc-400 transition-colors duration-200">Experience</a>
-        <a href="#contact" onClick={(e) => handleScroll(e, 'contact')} className="hover:text-zinc-400 transition-colors duration-200">Contact</a>
-      </nav>
-
-      {/* Hero / About Section */}
-      <section id="about" className="px-6 md:px-20 pt-28 pb-12 flex flex-col-reverse md:grid md:grid-cols-12 gap-8 items-center">
-        <motion.div 
-          className="md:col-span-7"
-          initial={{ opacity: 0, x: -40 }} 
-          animate={{ opacity: 1, x: 0 }} 
-          transition={{ duration: 0.8 }}
-        >
-          <div className="inline-flex items-center gap-2 bg-zinc-800/80 border border-zinc-700 px-3 py-1 rounded-full text-xs text-zinc-300 mb-3">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            Informatics Engineering Student • ULBI
-          </div>
-          
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight">
-            Muhamad Haekal Syukur
-          </h1>
-          
-          {/* About Narrative in English */}
-          <div className="text-gray-300 text-sm md:text-base mb-6 leading-relaxed max-w-xl space-y-3">
-            <p>
-              I am an Applied Bachelor (D4) Informatics Engineering student at <span className="text-white font-semibold">Universitas Logistik dan Bisnis Internasional (ULBI)</span> with a 3.65 GPA. Specializing in <span className="text-white font-semibold">Web Development</span>, I am experienced in building web applications from database architecture design to responsive user interfaces.
-            </p>
-            <p>
-              My core technical stack includes the <span className="text-white font-semibold">React, Next.js, Express.js, Go (Basics),</span> and <span className="text-white font-semibold">MongoDB</span> ecosystem. Proficient in engineering RESTful APIs, real-time architectures with Socket.io, and payment gateway integrations.
-            </p>
-          </div>
-
-         <div className="flex flex-wrap gap-x-8 gap-y-4 text-xs text-zinc-400 mb-6 border-l-2 border-zinc-700 pl-3 py-1">
-  <div>
-    <span className="block text-zinc-500 text-[10px] uppercase font-semibold">
-      Academic GPA
-    </span>
-    <strong className="text-zinc-200 text-sm">3.65 / 4.00</strong>
-  </div>
-
-  <div>
-    <span className="block text-zinc-500 text-[10px] uppercase font-semibold">
-      Location
-    </span>
-    <strong className="text-zinc-200 text-sm">Bandung, Indonesia</strong>
-  </div>
-
-  <div>
-    <span className="block text-zinc-500 text-[10px] uppercase font-semibold">
-      Status
-    </span>
-    <strong className="text-emerald-400 text-sm">
-      Open for Internship / Part Time
-    </strong>
-  </div>
-</div>
-
-          <div className="flex gap-3 flex-wrap items-center">
-            <a 
-              href="#projects" 
-              onClick={(e) => handleScroll(e, 'projects')}
-              className="bg-white text-black hover:bg-zinc-200 px-5 py-2.5 rounded-xl font-semibold text-xs md:text-sm transition shadow-lg cursor-pointer"
-            >
-              View Projects
-            </a>
-            <a 
-              href={`${process.env.PUBLIC_URL}/cv-muhamad-haekal-syukur.pdf`}
-              download="CV Muhamad Haekal Syukur.pdf"
-              className="bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-4 py-2.5 rounded-xl text-xs md:text-sm font-medium transition flex items-center gap-2"
-            >
-              <span>Download Resume</span>
-              <span className="text-zinc-400 text-xs">PDF</span>
-            </a>
-            <a 
-              href="https://github.com/haekalss" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="border border-zinc-700 hover:border-zinc-500 px-4 py-2.5 rounded-xl text-xs md:text-sm transition text-zinc-300"
-            >
-              GitHub Profile ↗
-            </a>
-          </div>
-        </motion.div>
-
-       {/* Profile Image Container */}
-<motion.div 
-  className="md:col-span-5 flex justify-center w-full"
-  initial={{ opacity: 0, x: 40 }} 
-  animate={{ opacity: 1, x: 0 }} 
-  transition={{ duration: 0.8 }}
->
-  <div className="w-56 h-56 md:w-72 md:h-72 rounded-full bg-zinc-800 flex items-center justify-center shadow-2xl overflow-hidden border-2 border-zinc-700 relative group">
-    {profileImageError ? (
-      <span className="text-4xl font-extrabold text-zinc-400">MHS</span>
-    ) : (
-      <img
-        src={`${process.env.PUBLIC_URL}/profile.png`}
-        alt="Muhamad Haekal Syukur profile"
-        /* scale-125 membuat gambar ter-zoom 25% di dalam bingkai, group-hover:scale-130 memberi efek zoom halus saat di-hover */
-        className="w-full h-full object-cover scale-125 transition-transform duration-500 group-hover:scale-130"
-        onError={() => setProfileImageError(true)}
-      />
-    )}
-  </div>
-</motion.div>
-      </section>
-
-      {/* Skills Section */}
-      <section id="skills" className="px-6 md:px-20 py-16 relative">
-        <div className="absolute top-0 left-6 right-6 md:left-20 md:right-20 h-px bg-zinc-800" aria-hidden="true" />
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">Skills & Tech Stack</h2>
-        <p className="text-zinc-400 text-sm mb-8">Technologies and tools I regularly use for software engineering.</p>
-        
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-          {skills.map((skill, i) => (
-            <div key={i} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4 flex items-center gap-4 hover:border-zinc-600 transition shadow-lg">
-              {skill.node}
-              <div>
-                <h3 className="font-semibold text-sm">{skill.name}</h3>
-                <span className="text-xs text-zinc-500">{skill.category}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Projects Section */}
-      <section id="projects" className="px-6 md:px-20 py-16 relative">
-        <div className="absolute top-0 left-6 right-6 md:left-20 md:right-20 h-px bg-zinc-800" aria-hidden="true" />
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">Featured Projects</h2>
-        <p className="text-zinc-400 text-sm mb-10">Case studies and applications I have developed as a full-stack engineer.</p>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, i) => (
-            <div key={i} className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 hover:border-zinc-600 transition shadow-xl flex flex-col justify-between">
-              <div>
-                <h3 className="text-xl font-bold mb-1">{project.title}</h3>
-                <p className="text-xs text-zinc-400 mb-3 font-medium">{project.subtitle}</p>
-                <p className="text-zinc-300 text-sm mb-4 leading-relaxed">{project.desc}</p>
-                
-                <div className="bg-black/50 border border-zinc-800/80 rounded-xl p-3 mb-5">
-                  <span className="text-xs font-semibold text-zinc-400 block mb-1.5">Key Features:</span>
-                  <ul className="list-disc list-inside text-xs text-zinc-300 space-y-1">
-                    {project.highlights.map((h, idx) => (
-                      <li key={idx}>{h}</li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="flex flex-wrap gap-1.5 mb-6">
-                  {project.tech.map((tech, idx) => (
-                    <span key={idx} className="text-xs bg-zinc-800 text-zinc-300 border border-zinc-700 px-2.5 py-1 rounded-lg">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex gap-3 pt-2 border-t border-zinc-800/60">
-                <a href={project.url} target="_blank" rel="noopener noreferrer" className="flex-1 text-center border border-zinc-700 py-2 rounded-xl text-xs font-medium hover:bg-zinc-800 transition">
-                  Source Code
-                </a>
-                <a href={project.website} target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-white text-black py-2 rounded-xl text-xs font-semibold hover:bg-zinc-200 transition">
-                  Live Demo
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Certifications Section */}
-      <section id="certifications" className="px-6 md:px-20 py-16 relative">
-        <div className="absolute top-0 left-6 right-6 md:left-20 md:right-20 h-px bg-zinc-800" aria-hidden="true" />
-        <h2 className="text-2xl md:text-3xl font-bold mb-2">Certifications</h2>
-        <p className="text-zinc-400 text-sm mb-8">Official certifications completed to strengthen core technical skill sets.</p>
-
-        <div className="grid md:grid-cols-2 gap-4">
-          {certifications.map((cert, i) => (
-            <div key={i} className="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 flex justify-between items-center hover:border-zinc-600 transition shadow-lg">
-              <div>
-                <span className="text-xs text-zinc-400 font-medium">{cert.issuer} • {cert.year}</span>
-                <h3 className="text-base font-bold mt-0.5 mb-2">{cert.title}</h3>
-                <div className="flex gap-1.5">
-                  {cert.skills.map((s, idx) => (
-                    <span key={idx} className="text-[10px] bg-zinc-800 text-zinc-400 border border-zinc-700/60 px-2 py-0.5 rounded">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <button 
-                onClick={() => setSelectedCert(cert)}
-                className="text-xs bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-3.5 py-2 rounded-xl transition flex items-center gap-1 font-medium text-zinc-200"
-              >
-                Preview ↗
-              </button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Certificate Preview Modal */}
-      <AnimatePresence>
-        {selectedCert && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
-            onClick={() => setSelectedCert(null)}
-          >
-            <motion.div 
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-zinc-900 border border-zinc-800 rounded-3xl p-6 max-w-2xl w-full shadow-2xl relative"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h3 className="text-lg font-bold">{selectedCert.title}</h3>
-                  <p className="text-xs text-zinc-400">{selectedCert.issuer} • {selectedCert.year}</p>
-                </div>
-                <button 
-                  onClick={() => setSelectedCert(null)}
-                  className="text-zinc-400 hover:text-white text-xl font-bold px-2"
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="w-full h-80 bg-zinc-950 rounded-2xl overflow-hidden border border-zinc-800 flex items-center justify-center mb-5">
-                <iframe 
-                  src={selectedCert.fileUrl} 
-                  title={selectedCert.title}
-                  className="w-full h-full"
-                />
-              </div>
-
-              <div className="flex justify-end gap-3">
-                <a 
-                  href={selectedCert.fileUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-xs bg-white text-black font-semibold px-4 py-2 rounded-xl hover:bg-zinc-200 transition"
-                >
-                  Open Full File ↗
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
+    <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="fixed inset-0 z-[200] bg-black flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.15] mix-blend-screen bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.75%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')]" />
+      <div className="absolute inset-0 flex items-center justify-center opacity-30 pointer-events-none">
+        <div className="w-px h-full bg-white absolute" />
+        <div className="w-full h-px bg-white absolute" />
+        <div className="w-[60vmin] h-[60vmin] border-2 border-white rounded-full absolute" />
+      </div>
+      <AnimatePresence mode="wait">
+        {count > 0 ? (
+          <motion.h1 key={count} initial={{ scale: 1.5, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.5, opacity: 0 }} transition={{ duration: 0.5 }} className="text-[35vmin] font-black text-white mix-blend-difference z-10">
+            {count}
+          </motion.h1>
+        ) : (
+          <motion.h1 key="action" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="text-4xl md:text-8xl font-black text-white uppercase tracking-widest z-10">
+            Action.
+          </motion.h1>
         )}
       </AnimatePresence>
+    </motion.div>
+  );
+}
 
-      {/* Organizational Experience Section */}
-      <section id="organization" className="px-6 md:px-20 py-16 relative">
-        <div className="absolute top-0 left-6 right-6 md:left-20 md:right-20 h-px bg-zinc-800" aria-hidden="true" />
-        <h2 className="text-2xl md:text-3xl font-bold mb-8">Leadership & Experience</h2>
+// ==========================================
+// CUSTOM CURSOR (DESKTOP ONLY)
+// ==========================================
+function CursorFollower() {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const x = useSpring(mouseX, { stiffness: 150, damping: 20 });
+  const y = useSpring(mouseY, { stiffness: 150, damping: 20 });
+
+  useEffect(() => {
+    const move = (e) => { mouseX.set(e.clientX - 7); mouseY.set(e.clientY - 7); };
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, [mouseX, mouseY]);
+
+  return <motion.div style={{ x, y }} className="pointer-events-none fixed z-[100] hidden md:block w-3 h-3 rounded-full border border-white mix-blend-difference" />;
+}
+
+// ==========================================
+// MAIN COMPONENT (RESPONSIVE: MOBILE VERTICAL / DESKTOP HORIZONTAL)
+// ==========================================
+export default function AnalogFilmPortfolio() {
+  const [isReady, setIsReady] = useState(false);
+  const containerRef = useRef(null);
+  const trackRef = useRef(null);
+  const [scrollWidth, setScrollWidth] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [profileError, setProfileError] = useState(false);
+  const [timecode, setTimecode] = useState("00:00:00:00");
+  const [isMobile, setIsMobile] = useState(false);
+
+  const copyEmail = () => {
+    navigator.clipboard.writeText('haaaekall@gmail.com');
+    alert('Email disalin: haaaekall@gmail.com');
+  };
+
+  // Deteksi ukuran layar untuk Switch Vertical/Horizontal
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const { scrollYProgress } = useScroll({ 
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 25, restDelta: 0.001 });
+  const timelineLeft = useTransform(smoothProgress, [0, 1], ["0%", "100%"]);
+  const xTransform = useTransform(smoothProgress, (val) => -val * scrollWidth);
+
+  useEffect(() => {
+    const updateScroll = () => {
+      if (trackRef.current && window.innerWidth >= 768) {
+        setScrollWidth(Math.max(0, trackRef.current.scrollWidth - window.innerWidth));
+      }
+    };
+    updateScroll();
+
+    const resizeObserver = new ResizeObserver(() => {
+      updateScroll();
+    });
+
+    if (trackRef.current) {
+      resizeObserver.observe(trackRef.current);
+    }
+
+    window.addEventListener("resize", updateScroll);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateScroll);
+    };
+  }, [isReady, isMobile]);
+
+  useEffect(() => {
+    if (!isReady) return;
+    const interval = setInterval(() => {
+      const ms = Math.floor(Math.random() * 99).toString().padStart(2, '0');
+      const sec = Math.floor((window.scrollY / 100) % 60).toString().padStart(2, '0');
+      const min = Math.floor((window.scrollY / 6000) % 60).toString().padStart(2, '0');
+      setTimecode(`01:${min}:${sec}:${ms}`);
+    }, 50);
+    return () => clearInterval(interval);
+  }, [isReady]);
+
+  return (
+    <>
+      <AnimatePresence>
+        {!isReady && <CinematicOpener onComplete={() => setIsReady(true)} />}
+      </AnimatePresence>
+
+      {/* Jika mobile: tinggi otomatis (natural vertical scroll), jika desktop: tinggi 700vh (horizontal scroll) */}
+      <div 
+        ref={containerRef} 
+        className={`${isMobile ? 'h-auto overflow-y-auto' : 'h-[700vh]'} bg-[#070707] text-white font-sans selection:bg-white selection:text-black relative`}
+      >
+        <CursorFollower />
         
-        <div className="grid md:grid-cols-2 gap-6">
-          {/* LKMM 2 */}
-          <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6">
-            <span className="text-xs text-zinc-500">
-              Informatics Engineering Student Association
-            </span>
+        {/* =========================================
+            VIEWFINDER HUD (FIXED / DESKTOP & MOBILE COMPACT)
+        ========================================= */}
+        <div className="fixed inset-0 pointer-events-none z-50 flex flex-col justify-between p-4 md:p-6">
+          <div className="absolute inset-0 opacity-[0.035] mix-blend-screen bg-[url('data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27180%27 height=%27180%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%27.75%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E')]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle,transparent_55%,rgba(0,0,0,.5))]" />
 
-            <h3 className="text-lg font-bold mt-1">
-              Project Manager — LKMM 2
-            </h3>
-
-            <p className="text-sm text-zinc-400 mt-2 leading-relaxed">
-              LKMM 2 (Student Management Skills Training) is a leadership and organizational management development program for Informatics Engineering students through workshops, group discussions, and case studies.
-            </p>
-
-            <ul className="list-disc list-inside text-xs text-zinc-300 mt-4 space-y-2 leading-relaxed">
-              <li>
-                Led the planning and execution of the program by coordinating cross-functional committees.
-              </li>
-              <li>
-                Formulated event timelines, task assignments, and monitored event preparation progress.
-              </li>
-              <li>
-                Liaised with key speakers and ensured the entire event program ran according to schedule.
-              </li>
-            </ul>
+          <div className="relative flex justify-between items-start font-mono text-[9px] md:text-[10px] tracking-widest text-zinc-500">
+            <div className="flex items-center gap-2 text-red-600">
+              <motion.div animate={{ opacity: [1, 0, 1] }} transition={{ repeat: Infinity, duration: 1.5 }} className="w-1.5 h-1.5 bg-red-600 rounded-full" />
+              <span>REC</span>
+            </div>
+            <div className="text-right text-[9px]"><p>ISO 400 • 24 FPS</p></div>
           </div>
 
-          {/* MORRIS IF */}
-          <div className="bg-zinc-900/60 border border-zinc-800 rounded-2xl p-6">
-            <span className="text-xs text-zinc-500">
-              Informatics Engineering Student Association
-            </span>
+          {!isMobile && (
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] h-[85vh] border border-white/5 flex items-center justify-center">
+                <div className="w-3 h-px bg-white/20 absolute top-1/2 -left-1.5" />
+                <div className="w-3 h-px bg-white/20 absolute top-1/2 -right-1.5" />
+                <div className="w-px h-3 bg-white/20 absolute -top-1.5 left-1/2" />
+                <div className="w-px h-3 bg-white/20 absolute -bottom-1.5 left-1/2" />
+            </div>
+          )}
 
-            <h3 className="text-lg font-bold mt-1">
-              Secretary — MORRIS IF
-            </h3>
-
-            <p className="text-sm text-zinc-400 mt-2 leading-relaxed">
-              MORRIS IF is an orientation program for fresh Informatics Engineering students aimed at introducing student organization culture, structure, and academic community environment.
-            </p>
-
-            <ul className="list-disc list-inside text-xs text-zinc-300 mt-4 space-y-2 leading-relaxed">
-              <li>
-                Managed event administration, including drafting official letters, proposals, and supporting documents.
-              </li>
-              <li>
-                Recorded meeting minutes and archived administrative records to support team coordination.
-              </li>
-              <li>
-                Ensured smooth administrative flow and committee communication throughout preparation and execution.
-              </li>
-            </ul>
+          <div className="relative flex flex-col gap-1.5 pointer-events-auto">
+            <div className="flex justify-between items-end font-mono text-[9px] md:text-[10px] text-zinc-500">
+              <span className="text-sm md:text-base font-bold tracking-tight text-white">{timecode}</span>
+              <span>{isMobile ? 'VERTICAL ROLL' : 'TIMELINE / ROLL'}</span>
+            </div>
+            <div className="w-full h-1.5 md:h-2.5 border border-zinc-800 bg-black/50 relative flex items-center overflow-hidden">
+              <motion.div 
+                className="absolute h-full w-[2px] bg-white shadow-[0_0_8px_white] z-10" 
+                style={{ left: timelineLeft }} 
+              />
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="px-6 md:px-20 py-16 text-center relative">
-        <div className="absolute top-0 left-6 right-6 md:left-20 md:right-20 h-px bg-zinc-800" aria-hidden="true" />
-        <div className="w-full max-w-2xl mx-auto bg-zinc-900/80 border border-zinc-800 rounded-3xl p-8 shadow-2xl">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3">Let's Work Together</h2>
-          <p className="text-zinc-400 text-sm mb-6 leading-relaxed">
-            I am open to internship opportunities, part-time roles, freelance projects, and web application development collaborations.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
-            <a 
-              href="mailto:haaaekall@gmail.com" 
-              className="bg-white text-black px-6 py-3 rounded-2xl font-semibold text-sm hover:bg-zinc-200 transition w-full sm:w-auto"
+        {/* =========================================
+            CONTENT WRAPPER: VERTICAL DI MOBILE, HORIZONTAL DI DESKTOP
+        ========================================= */}
+        <div className={`${isMobile ? 'relative z-10 flex flex-col gap-20 py-24 px-6' : 'fixed top-0 left-0 w-full h-screen overflow-hidden z-10 flex flex-col justify-center'}`}>
+          <motion.div 
+            ref={trackRef} 
+            style={isMobile ? {} : { x: xTransform }} 
+            className={`${isMobile ? 'flex flex-col gap-24' : 'flex w-max items-center h-full'}`}
+          >
+            
+            {/* SCENE 01: ABOUT (HERO) */}
+            <div className={`${isMobile ? 'w-full min-h-screen flex flex-col justify-center' : 'w-screen shrink-0 h-full flex flex-row items-center justify-center px-[10vw] border-r-[3px] border-dashed border-zinc-800'} relative gap-12`}>
+              <div className="w-full md:flex-1 md:pr-10 z-10">
+                <p className="font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase mb-3">Scene 01 / Opening Frame</p>
+                <h1 className="text-[clamp(2.8rem,7vw,7rem)] font-black uppercase leading-[.85] tracking-[-.08em]">
+                  Muhamad<br /><span className="text-zinc-600">Haekal</span><br />Syukur.
+                </h1>
+                <div className="h-px bg-zinc-700 w-full max-w-[180px] mt-6" />
+                <p className="mt-3 text-[8px] md:text-[9px] tracking-[.3em] uppercase text-zinc-500 font-mono">
+                  Applied Bachelor (D4) Informatics Engineering • ULBI (GPA 3.65)
+                </p>
+                <p className="mt-4 max-w-lg text-xs md:text-sm text-zinc-400 leading-relaxed font-sans">
+                  Specializing in Web Development, experienced in building web applications from database architecture design to responsive user interfaces. Proficient in engineering RESTful APIs, real-time architectures with Socket.io, and payment gateway integrations.
+                </p>
+              </div>
+              
+              <div className="w-3/5 max-w-[220px] md:max-w-[320px] flex-shrink-0 relative aspect-[4/5] bg-zinc-900 border border-zinc-700 p-1.5 transform rotate-1 z-10 mx-auto md:mx-0">
+                <div className="w-full h-full relative overflow-hidden bg-black" style={{ clipPath: 'polygon(0 15%, 100% 0, 100% 100%, 0 100%)' }}>
+                  {profileError ? (
+                    <div className="w-full h-full flex items-center justify-center"><span className="text-xl font-black text-zinc-700">MHS</span></div>
+                  ) : (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/profile.png`}
+                      alt="Muhamad Haekal Syukur"
+                      onError={() => setProfileError(true)}
+                      className="w-full h-full object-cover grayscale contrast-125 mix-blend-luminosity scale-110"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-tr from-black via-transparent to-red-900/20 mix-blend-overlay" />
+                </div>
+                <span className="absolute -bottom-4 right-0 font-mono text-[6px] text-zinc-500 tracking-[0.3em]">HAEKAL_PORTRAIT.RAW</span>
+              </div>
+            </div>
+
+            {/* SCENE 02: SKILLS (TOOLBOX) */}
+            <div className={`${isMobile ? 'w-full min-h-screen flex flex-col justify-center' : 'w-screen shrink-0 h-full flex flex-col justify-center px-[10vw] border-r-[3px] border-dashed border-zinc-800'} relative z-10`}>
+              <p className="font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase mb-4">Scene 02 / Core Stack</p>
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-[-.05em] mb-6 text-white">The Toolbox.</h2>
+              
+              <div className="w-full max-w-4xl grid grid-cols-2 md:grid-cols-4 gap-3">
+                {skills.map(([name, category, mark], i) => (
+                  <div key={name} className="bg-zinc-900/40 border border-zinc-800/80 p-4 flex flex-col justify-between hover:border-zinc-500 transition group">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="font-mono text-[8px] text-zinc-600">0{i + 1}</span>
+                      <span className="font-mono text-[8px] px-1.5 py-0.5 bg-black text-zinc-400 border border-zinc-800">{category}</span>
+                    </div>
+                    <div>
+                      <div className="w-8 h-8 border border-zinc-700 flex items-center justify-center font-black text-xs bg-black text-zinc-300 group-hover:border-white group-hover:text-white transition mb-3">
+                        {mark}
+                      </div>
+                      <h3 className="text-sm font-bold text-zinc-200 uppercase tracking-tight">{name}</h3>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* SCENE 03: PROJECTS (SELECTED WORK) */}
+            <div className={`${isMobile ? 'w-full flex flex-col gap-6' : 'flex h-full items-center gap-6 px-[5vw] border-r-[3px] border-dashed border-zinc-800'} relative z-10`}>
+              {!isMobile && <div className="absolute top-[12%] left-[5vw] font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase">Scene 03 / Box Office</div>}
+              {isMobile && <p className="font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase">Scene 03 / Box Office</p>}
+              
+              <div className={`${isMobile ? 'flex flex-col gap-6 w-full' : 'contents'}`}>
+                {projects.map((project) => (
+                  <div key={project.title} className={`${isMobile ? 'w-full' : 'w-[42vw] shrink-0 h-[60vh]'} relative group flex flex-col justify-center`}>
+                    <div className="w-full bg-zinc-900 border border-zinc-800 flex flex-col justify-between p-6 hover:bg-[#0a0a0a] transition-colors relative z-10">
+                      <div className="flex justify-between items-start border-b border-zinc-800 pb-3">
+                        <span className="font-mono text-[9px] tracking-[0.3em] text-zinc-500">TAKE {project.number}</span>
+                        <span className="font-mono text-[9px] text-zinc-600 bg-black px-2 py-1">{project.year}</span>
+                      </div>
+
+                      <div className="py-4">
+                        <p className="font-mono text-[8px] tracking-[0.3em] text-zinc-500 uppercase">{project.type}</p>
+                        <h3 className="mt-2 text-2xl md:text-4xl font-black uppercase leading-[.85] tracking-[-.05em] text-white">
+                          {project.title}
+                        </h3>
+                        <div className="mt-3 flex flex-wrap gap-1.5">
+                          {project.tech.map((tech) => (
+                            <span key={tech} className="font-mono text-[8px] uppercase border border-zinc-700 bg-black/50 px-2 py-0.5 text-zinc-400">{tech}</span>
+                          ))}
+                        </div>
+                        <button 
+                          onClick={() => setSelectedProject(project)}
+                          className="mt-6 group/btn inline-flex items-center gap-2 text-[9px] uppercase tracking-[0.25em] border-b border-zinc-600 pb-1.5 hover:border-white transition cursor-pointer pointer-events-auto"
+                        >
+                          <span className="w-4 h-4 border border-zinc-600 rounded-full flex items-center justify-center group-hover/btn:bg-white group-hover/btn:text-black transition">→</span>
+                          Screen This
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* SCENE 04: CERTIFICATES (AWARDS) */}
+            <div className={`${isMobile ? 'w-full min-h-screen flex flex-col justify-center' : 'w-screen shrink-0 h-full flex flex-col justify-center px-[10vw] border-r-[3px] border-dashed border-zinc-800'} relative z-10`}>
+              <p className="font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase mb-4">Scene 04 / Awards</p>
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-[-.05em] mb-6 text-white">Certifications.</h2>
+              
+              <div className="flex flex-col gap-3 w-full max-w-4xl">
+                {certificates.map((cert) => (
+                  <div key={cert.id} className="flex flex-col md:flex-row md:items-center justify-between border-b border-zinc-800 pb-3 group hover:border-zinc-500 transition-colors">
+                    <div>
+                      <span className="font-mono text-[8px] text-zinc-600 tracking-widest block mb-0.5">CERT / {cert.id}</span>
+                      <h3 className="text-base md:text-xl font-black uppercase text-zinc-300 group-hover:text-white transition-colors">{cert.title}</h3>
+                    </div>
+                    <div className="mt-1 md:mt-0 text-left md:text-right">
+                      <p className="font-mono text-[9px] text-zinc-400 uppercase">{cert.issuer}</p>
+                      <p className="font-mono text-[8px] text-zinc-600">{cert.year}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* SCENE 05: EXPERIENCE (ORGANIZATION) */}
+            <div className={`${isMobile ? 'w-full min-h-screen flex flex-col justify-center' : 'w-screen shrink-0 h-full flex flex-col justify-center px-[10vw] border-r-[3px] border-dashed border-zinc-800'} relative z-10`}>
+              <p className="font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase mb-4">Scene 05 / Production Experience</p>
+              <h2 className="text-3xl md:text-5xl font-black uppercase tracking-[-.05em] mb-6 text-white">The Crew.</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full max-w-5xl">
+                {orgs.map((org, index) => (
+                  <div key={index} className="bg-zinc-900/40 border border-zinc-800 p-5 relative group hover:border-zinc-500 transition-colors">
+                    <span className="absolute top-0 left-4 -translate-y-1/2 bg-[#070707] px-2 font-mono text-[8px] text-zinc-500 border border-zinc-800">RECORD 0{index + 1}</span>
+                    <h3 className="text-base md:text-xl font-black uppercase text-white mt-1">{org.role}</h3>
+                    <p className="font-mono text-[9px] uppercase text-zinc-500 mb-3">{org.event}</p>
+                    <div className="flex flex-col gap-1.5">
+                      {org.desc.map((item, i) => (
+                        <p key={i} className="text-[10px] md:text-xs text-zinc-400 font-mono leading-relaxed border-l border-zinc-700 pl-2.5">
+                          {item}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* SCENE 06: CONTACT & SOCIAL LINKS */}
+            <div className={`${isMobile ? 'w-full min-h-screen flex flex-col justify-center' : 'w-screen shrink-0 h-full flex flex-col justify-center px-[10vw]'} relative z-10 text-left`}>
+              <p className="font-mono text-[9px] tracking-[.4em] text-zinc-600 uppercase mb-4">Final Scene / Documentation</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 w-full max-w-5xl items-center">
+                <div>
+                  <h2 className="text-3xl md:text-5xl font-black uppercase tracking-[-.05em] mb-6 text-zinc-200">End Credits.</h2>
+                  
+                  <div className="flex gap-4 mb-6 font-mono text-xs uppercase tracking-widest">
+                    <a href="https://github.com/Haekalss" target="_blank" rel="noopener noreferrer" className="border-b border-zinc-700 hover:border-white pb-1 transition">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/muhamad-haekal-syukur-4b2018328/" target="_blank" rel="noopener noreferrer" className="border-b border-zinc-700 hover:border-white pb-1 transition">LinkedIn ↗</a>
+                    <a href="https://www.instagram.com/haekalsss_/" target="_blank" rel="noopener noreferrer" className="border-b border-zinc-700 hover:border-white pb-1 transition">Instagram ↗</a>
+                  </div>
+
+                  <div className="space-y-3 w-full">
+                    {credits.map(([label, value]) => (
+                      <div key={label} className="flex flex-col border-b border-zinc-900 pb-1.5">
+                        <span className="font-mono text-[8px] text-zinc-600 uppercase tracking-widest">{label}</span>
+                        <p className="text-xs md:text-sm font-bold text-zinc-400 uppercase">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-start md:items-end md:text-right border-l-2 md:border-l-0 md:border-r-2 border-red-600 pl-4 md:pl-0 md:pr-6">
+                  <p className="font-mono text-[10px] text-zinc-400 mb-5 max-w-xs">
+                    Need the full script? Download my complete curriculum vitae or start a conversation for the next scene.
+                  </p>
+                  <div className="flex flex-col gap-2.5 pointer-events-auto w-full md:w-auto">
+                    <a href="/cv.pdf" target="_blank" className="inline-flex justify-center md:justify-end items-center gap-3 bg-white text-black px-6 py-3.5 text-[9px] md:text-[10px] font-black uppercase tracking-widest hover:bg-zinc-200 transition">
+                      Download CV <span className="text-sm">↓</span>
+                    </a>
+                    <button onClick={copyEmail} className="border border-zinc-800 bg-zinc-900/50 px-6 py-3.5 text-[9px] md:text-[10px] uppercase tracking-widest text-zinc-300 hover:text-white hover:border-zinc-500 transition w-full md:w-auto text-center md:text-right">
+                      Copy Email Address
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
+        </div>
+
+        {/* =========================================
+            MODAL PROJECT
+        ========================================= */}
+        <AnimatePresence>
+          {selectedProject && (
+            <motion.div
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+              onClick={() => setSelectedProject(null)}
+              className="fixed inset-0 z-[300] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-10 pointer-events-auto"
             >
-              Send Email
-            </a>
-            <button 
-              onClick={handleCopyEmail}
-              className="border border-zinc-700 bg-zinc-800/80 px-6 py-3 rounded-2xl text-sm font-medium hover:bg-zinc-700 transition w-full sm:w-auto"
-            >
-              {copied ? '✓ Email Copied!' : 'Copy Email Address'}
-            </button>
-          </div>
-        </div>
-      </section>
+              <motion.div
+                initial={{ opacity: 0, scale: .96, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: .96, y: 20 }}
+                onClick={(e) => e.stopPropagation()}
+                className="w-full max-w-4xl max-h-[85vh] overflow-y-auto border border-zinc-800 bg-[#090909] shadow-2xl"
+              >
+                <div className="sticky top-0 z-20 bg-black/90 backdrop-blur-sm border-b border-zinc-900 px-5 py-3.5 flex justify-between items-center">
+                  <span className="font-mono text-[8px] uppercase tracking-widest text-zinc-500">Project / {selectedProject.number}</span>
+                  <button onClick={() => setSelectedProject(null)} className="text-zinc-400 hover:text-white text-xs font-mono tracking-widest uppercase">Close ✕</button>
+                </div>
 
-      {/* Footer */}
-      <footer className="text-center py-8 text-zinc-500 border-t border-zinc-800 text-xs">
-        <p className="mb-4">© {new Date().getFullYear()} Muhamad Haekal Syukur.</p>
-        <div className="flex justify-center gap-6 text-zinc-400">
-          <a href="https://github.com/haekalss" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">GitHub</a>
-          <a href="https://www.linkedin.com/in/muhamad-haekal-syukur-4b2018328/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">LinkedIn</a>
-          <a href="https://www.instagram.com/haekalsss_/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition">Instagram</a>
-        </div>
-      </footer>
-    </div>
+                <div className="p-6 md:p-8">
+                  <p className="font-mono text-[9px] uppercase tracking-[.3em] text-zinc-600">{selectedProject.type}</p>
+                  <h2 className="mt-2 text-[clamp(2rem,5vw,4rem)] font-black uppercase tracking-[-.05em] leading-[.9] text-white">
+                    {selectedProject.title}
+                  </h2>
+
+                  <div className="mt-6 md:mt-8 grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
+                    <div className="md:col-span-7">
+                      <p className="text-xs md:text-sm text-zinc-400 leading-relaxed">
+                        {selectedProject.desc}
+                      </p>
+                      <blockquote className="mt-5 border-l-2 border-zinc-700 pl-4 text-xs md:text-base font-bold text-zinc-300 leading-snug">
+                        “{selectedProject.quote}”
+                      </blockquote>
+                    </div>
+
+                    <div className="md:col-span-5 md:border-l border-zinc-900 md:pl-6">
+                      <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-600 mb-2">Tech Stack</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {selectedProject.tech.map((tech) => (
+                          <span key={tech} className="text-[8px] border border-zinc-800 bg-zinc-900/50 px-2 py-0.5 text-zinc-300">{tech}</span>
+                        ))}
+                      </div>
+
+                      <div className="mt-6">
+                        <p className="font-mono text-[8px] uppercase tracking-widest text-zinc-600 mb-2">Links</p>
+                        <div className="flex flex-col gap-2">
+                          <a href={selectedProject.website} target="_blank" rel="noopener noreferrer" className="text-xs text-white border-b border-zinc-800 pb-1.5 hover:border-zinc-400 transition flex justify-between">
+                            Live Project <span>↗</span>
+                          </a>
+                          <a href={selectedProject.url} target="_blank" rel="noopener noreferrer" className="text-xs text-white border-b border-zinc-800 pb-1.5 hover:border-zinc-400 transition flex justify-between">
+                            Source Code <span>↗</span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
 }
