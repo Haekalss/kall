@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring, useMotionValue } from 'framer-motion';
 
 // ==========================================
@@ -244,7 +244,7 @@ export default function AnalogFilmPortfolio() {
     showToast("EMAIL COPIED: haaaekall@gmail.com");
   };
 
-  const scrollToScene = (index) => {
+  const scrollToScene = useCallback((index) => {
     const safeIndex = Math.max(0, Math.min(TOTAL_SCENES - 1, index));
     if (isMobile) {
       const sceneElements = document.querySelectorAll('[data-scene]');
@@ -255,7 +255,7 @@ export default function AnalogFilmPortfolio() {
       const targetY = safeIndex * window.innerHeight;
       window.scrollTo({ top: targetY, behavior: 'smooth' });
     }
-  };
+  }, [isMobile]);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -373,7 +373,7 @@ export default function AnalogFilmPortfolio() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [currentScene, selectedProject, selectedCert, isMobile]);
+  }, [currentScene, selectedProject, selectedCert, scrollToScene]);
 
   useEffect(() => {
     if (!isReady) return;
