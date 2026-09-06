@@ -819,7 +819,7 @@ export default function AnalogFilmPortfolio() {
                     key={index} 
                     className="bg-zinc-950/90 border border-zinc-800 p-5 sm:p-6 relative group hover:border-red-500 transition-all shadow-xl flex flex-col justify-between"
                   >
-                    <div>
+                    <div className="pt-1.5 sm:pt-1">
                       <span className="absolute top-0 left-5 -translate-y-1/2 bg-[#070707] px-2.5 py-0.5 font-mono text-[8px] text-red-400 border border-zinc-800 font-bold">
                         RECORD 0{index + 1}
                       </span>
@@ -859,11 +859,11 @@ export default function AnalogFilmPortfolio() {
                     <a href="https://www.instagram.com/haekalsss_/" target="_blank" rel="noopener noreferrer" className="border-b border-zinc-700 hover:border-red-500 text-zinc-300 hover:text-white pb-0.5 sm:pb-1 transition">Instagram ↗</a>
                   </div>
 
-                  <div className="space-y-2 sm:space-y-2.5 w-full">
+                  <div className="space-y-2.5 sm:space-y-3 w-full">
                     {credits.map(([label, value]) => (
-                      <div key={label} className="flex justify-between items-baseline border-b border-zinc-900 pb-1.5">
-                        <span className="font-mono text-[8px] text-zinc-500 uppercase tracking-widest">{label}</span>
-                        <p className="text-[11px] sm:text-xs font-bold text-zinc-300 uppercase font-mono">{value}</p>
+                      <div key={label} className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1 sm:gap-4 border-b border-zinc-900 pb-2">
+                        <span className="font-mono text-[8px] sm:text-[9px] text-zinc-500 uppercase tracking-widest shrink-0">{label}</span>
+                        <p className="text-[11px] sm:text-xs font-bold text-zinc-300 uppercase font-mono sm:text-right leading-snug">{value}</p>
                       </div>
                     ))}
                   </div>
